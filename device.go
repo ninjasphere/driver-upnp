@@ -65,6 +65,8 @@ func (d *MediaPlayer) SetTransportClient(transportClient *av.AVTransport1) error
 	if d.transportClient == nil {
 
 		d.player.ApplyPlayPause = d.applyPlayPause
+		d.player.ApplyStop = d.applyStop
+		d.player.ApplyPlaylistJump = d.applyPlaylistJump
 		if err := d.player.EnableControlChannel([]string{"playing", "paused", "stopped"}); err != nil {
 			d.player.Log().Fatalf("Failed to enable control channel: %s", err)
 		}
@@ -89,13 +91,23 @@ func (d *MediaPlayer) SetRenderingClient(renderingClient *av.RenderingControl1) 
 	return nil
 }
 
+func (d *MediaPlayer) applyPlaylistJump(delta int) error {
+	if delta > 0 {
+		return d.transportClient.Next(0)
+	}
+	return d.transportClient.Previous(0)
+}
+
 func (d *MediaPlayer) applyPlayPause(play bool) error {
 
 	if play {
 		return d.transportClient.Play(0, "1")
 	}
-
 	return d.transportClient.Pause(0)
+}
+
+func (d *MediaPlayer) applyStop() error {
+	return d.transportClient.Stop(0)
 }
 
 func (d *MediaPlayer) applyVolume(state *channels.VolumeState) (err error) {
