@@ -1,0 +1,10 @@
+{
+  "id": "com.ninjablocks.upnp",
+  "name": "UPnP Driver",
+  "version": "0.1.0",
+  "description": "Exports UPnP Devices as Ninja Sphere Devices",
+  "main": "driver-upnp",
+  "author": "Elliot Shepherd <elliot@ninjablocks.com>",
+  "license": "MIT",
+  "maxMemory": 10
+}
