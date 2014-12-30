@@ -4,10 +4,10 @@ import (
 	"time"
 
 	"github.com/huin/goupnp"
-	"github.com/huin/goupnp/dcps/av"
 	"github.com/ninjasphere/go-ninja/api"
 	"github.com/ninjasphere/go-ninja/logger"
 	"github.com/ninjasphere/go-ninja/support"
+	"github.com/ninjasphere/goupnp/dcps/av"
 )
 
 var info = ninja.LoadModuleInfo("./package.json")

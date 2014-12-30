@@ -2,11 +2,11 @@ package main
 
 import (
 	"github.com/huin/goupnp"
-	"github.com/huin/goupnp/dcps/av"
 	"github.com/ninjasphere/go-ninja/api"
 	"github.com/ninjasphere/go-ninja/channels"
 	"github.com/ninjasphere/go-ninja/devices"
 	"github.com/ninjasphere/go-ninja/model"
+	"github.com/ninjasphere/goupnp/dcps/av"
 )
 
 type MediaPlayer struct {
