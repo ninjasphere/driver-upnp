@@ -3,6 +3,7 @@ package main
 import (
 	"time"
 
+	"github.com/davecgh/go-spew/spew"
 	"github.com/huin/goupnp"
 	"github.com/ninjasphere/go-ninja/api"
 	"github.com/ninjasphere/go-ninja/logger"
@@ -78,6 +79,7 @@ func (d *Driver) Search() error {
 	}
 
 	for _, client := range transportClients {
+		spew.Dump(client)
 		device, err := d.getDevice(client.ServiceClient.RootDevice.Device)
 		if err != nil {
 			log.Warningf("Found a transport client, but couldn't create the device. %s", err)
@@ -89,17 +91,18 @@ func (d *Driver) Search() error {
 	renderingClients, errors, err := av.NewRenderingControl1Clients()
 
 	if err != nil {
-		log.Fatalf("Failed to find transport clients: %s", err)
+		log.Fatalf("Failed to find rendering clients: %s", err)
 	}
 
 	for _, e := range errors {
-		log.Warningf("Error finding transport clients: %s", e)
+		log.Warningf("Error finding rendering clients: %s", e)
 	}
 
 	for _, client := range renderingClients {
+		spew.Dump(client)
 		device, err := d.getDevice(client.ServiceClient.RootDevice.Device)
 		if err != nil {
-			log.Warningf("Found a transport client, but couldn't create the device. %s", err)
+			log.Warningf("Found a rendering client, but couldn't create the device. %s", err)
 			continue
 		}
 		device.SetRenderingClient(client)
